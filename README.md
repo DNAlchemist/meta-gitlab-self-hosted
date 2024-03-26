@@ -14,8 +14,8 @@ How that works?
 ---
 ### Install meta
  ```console
-yarn global add meta
-```
+yarn global add meta # or npm install -g meta
+ ```
 
 ### Init repository list 
 To init or refresh repository list, execute the init_repos.sh script
