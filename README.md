@@ -18,7 +18,7 @@ yarn global add meta # or npm install -g meta
  ```
 
 ### Init repository list 
-To init or refresh repository list, execute the init_repos.sh script
+To init or refresh repository list, execute the init.sh script
 
 To usage, you need to obtain some environment from your bitbucket account.
 
