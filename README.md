@@ -25,7 +25,7 @@ To usage, you need to obtain some environment from your bitbucket account.
  ```
 export GITLAB_DOMAIN=<gitlab url>
 # https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html 
-export GITLAB_TOKEN=<bitbucket app password>
+export GITLAB_TOKEN=<gitlab app password>
 ./init.sh
 ```
 
