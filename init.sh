@@ -16,7 +16,20 @@ page=1
 while :
 do
     # Use GitLab API to get a list of projects
-    response=$(curl --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "$GITLAB_DOMAIN/$GITLAB_API/projects?membership=true&per_page=$PER_PAGE&page=$page")
+    response=$(curl --silent --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "$GITLAB_DOMAIN/$GITLAB_API/projects?membership=true&per_page=$PER_PAGE&page=$page")
+
+    # Check if the response is an object (for error) or array (for projects)
+    if echo "$response" | jq 'type' | grep -q '"object"'; then
+        error_message=$(echo "$response" | jq -r '.error // empty')
+        if [ -n "$error_message" ]; then
+            error_description=$(echo "$response" | jq -r '.error_description // empty')
+            echo "Error: $error_message"
+            if [ -n "$error_description" ]; then
+                echo "Description: $error_description"
+            fi
+            exit 1
+        fi
+    fi
 
     # Check if the response is empty (i.e., we've reached the end of the project list)
     if [ "$(echo $response | jq '. | length')" == "0" ]; then
